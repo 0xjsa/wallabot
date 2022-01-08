@@ -12,6 +12,9 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>wallabot</name>
 	<description>Bot para wallapop</description>
+	<properties>
+		<java.version>8</java.version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
