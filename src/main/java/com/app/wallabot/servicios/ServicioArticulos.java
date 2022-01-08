@@ -61,7 +61,7 @@ public class ServicioArticulos {
 		});
 	}
 
-	public List<ArticulosDTO> getNuevosArticulos(Long idBusqueda) throws URISyntaxException {
+	public List<ArticulosDTO> getNuevosArticulosBusqueda(Long idBusqueda) throws URISyntaxException {
 		Optional<Busquedas> busqueda = busquedasRepo.findById(idBusqueda);
 
 		List<Articulos> existentes = articulosRepo.findByBusqueda(busqueda.get());
@@ -74,6 +74,21 @@ public class ServicioArticulos {
 		return (nuevos != null && !nuevos.isEmpty())
 				? nuevos.parallelStream().map(Articulos::toDTO).collect(Collectors.toList())
 				: null;
+	}
+
+	public List<ArticulosDTO> getArticulosNuevos() throws URISyntaxException {
+		List<Busquedas> busquedas = busquedasRepo.findAll();
+
+		List<ArticulosDTO> articulosNuevos = new ArrayList<ArticulosDTO>();
+		busquedas.forEach((busqueda) -> {
+			try {
+				articulosNuevos.addAll(getNuevosArticulosBusqueda(busqueda.getId()));
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+		});
+
+		return articulosNuevos;
 	}
 
 	public List<ArticulosDTO> getArticulosByBusqueda(Long idBusqueda) {

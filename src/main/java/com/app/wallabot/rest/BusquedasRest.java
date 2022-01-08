@@ -67,8 +67,13 @@ public class BusquedasRest {
 	}
 
 	@GetMapping("/{id}/articulosNuevos")
-	public ResponseEntity<List<ArticulosDTO>> getArticulosNuevos(@PathVariable(value = "id") Long busquedasId) throws URISyntaxException {
-		return ResponseEntity.ok(servicioArticulos.getNuevosArticulos(busquedasId));
+	public ResponseEntity<List<ArticulosDTO>> getArticulosNuevosBusqueda(@PathVariable(value = "id") Long busquedasId) throws URISyntaxException {
+		return ResponseEntity.ok(servicioArticulos.getNuevosArticulosBusqueda(busquedasId));
+	}
+	
+	@GetMapping("/articulosNuevos")
+	public ResponseEntity<List<ArticulosDTO>> getArticulosNuevos() throws URISyntaxException{
+		return ResponseEntity.ok(servicioArticulos.getArticulosNuevos());
 	}
 	
 	@GetMapping("/{id}/articulos")
