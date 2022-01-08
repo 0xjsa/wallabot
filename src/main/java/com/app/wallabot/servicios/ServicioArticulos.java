@@ -76,4 +76,11 @@ public class ServicioArticulos {
 				: null;
 	}
 
+	public List<ArticulosDTO> getArticulosByBusqueda(Long idBusqueda) {
+		Optional<Busquedas> busqueda = busquedasRepo.findById(idBusqueda);
+
+		return articulosRepo.findByBusqueda(busqueda.get()).parallelStream().map(Articulos::toDTO)
+				.collect(Collectors.toList());
+	}
+
 }

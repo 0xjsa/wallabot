@@ -70,5 +70,12 @@ public class BusquedasRest {
 	public ResponseEntity<List<ArticulosDTO>> getArticulosNuevos(@PathVariable(value = "id") Long busquedasId) throws URISyntaxException {
 		return ResponseEntity.ok(servicioArticulos.getNuevosArticulos(busquedasId));
 	}
+	
+	@GetMapping("/{id}/articulos")
+	public ResponseEntity<List<ArticulosDTO>> getArticulos(@PathVariable(value = "id") Long busquedasId){
+		return ResponseEntity.ok(servicioArticulos.getArticulosByBusqueda(busquedasId));
+		
+	}
+	
 
 }
